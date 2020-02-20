@@ -7,6 +7,8 @@
             </button>
        </div>
 
+    
+
     </div>
 </template>
 
@@ -17,7 +19,7 @@ export default {
 
     data() {
         return {
-            // score: 0,
+            
         }
     },
 
@@ -43,7 +45,7 @@ export default {
           },
 
           gameOver() {
-            this.modalShow = true;
+            this.$store.state.modalShow = true;
         },
     }
     
@@ -76,4 +78,6 @@ export default {
         /* display: flex;
         flex-wrap: wrap; */
     }
+
+    
 </style>
