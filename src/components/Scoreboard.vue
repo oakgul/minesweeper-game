@@ -4,7 +4,8 @@
         <div class="scoreboard float-right">
             <div class="header">Top 10 Score</div>
             <ul>
-                <li style="list-style-type:none" v-for="player in names" :key="player.id"> {{names.indexOf(player) + 1}}  {{ player }}</li>
+                <li style="list-style-type:none" v-for="player in names" :key="player.id">
+                     {{names.indexOf(player) + 1}}.  {{ player }}</li>
             </ul>
         </div>
 
@@ -25,21 +26,29 @@ export default {
 
 <style scoped>
 
+    .scoreboard {
+        width: 350px;
+        height: 330px;
+        background-color: #F7F9FA;;
+        margin-top: -320px;
+        box-shadow: 0px 3px 0px #E6E6E6;
+        border-radius: 10px;
+    }
+
     .header {
         width: 100%;
         height: 50px;
-        background-color: lightgreen;
+        background-color:#00BCE5;
+        color: white;
         text-align: center;
-        font-size: 30px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 50px;
+        box-shadow: 0px 3px 0px #E5E5E5;
+        border-radius: 10px 10px 0px 0px;
     }
 
-    .scoreboard {
-        width: 432px;
-        height: 330px;
-        background-color: lightslategray;
-        margin-top: -320px;
-        border: 1px solid black;
-    }
+    
     
 
 </style>

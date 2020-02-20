@@ -1,6 +1,6 @@
 <template>
   <div class="container" id="app">
-    <Head />
+    <Head class="mt-2" />
     <hr>  
     <Minefield />
     <Scoreboard />
@@ -21,3 +21,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .container {
+    width: 900px;
+  }
+</style>

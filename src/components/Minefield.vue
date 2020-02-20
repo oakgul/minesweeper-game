@@ -61,6 +61,7 @@ export default {
         height: 61px;
         border-radius: 5px;
         background-color: #5D6980;
+        box-shadow: 0px 5px 0px #DFDFDF;
         display: inline-block;
         margin-right: 5px;
         margin-bottom: 1px;

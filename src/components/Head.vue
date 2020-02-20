@@ -2,12 +2,25 @@
   <div class="container">
 
     <div class="main-head mb-3">
-      <div class="logo"><h1>MINEFILED</h1></div>
-      <div class="score">Score : {{score}}</div>
+      <div class="logo">
+        <span class="mine-text">MINE</span>
+        <img src="../assets/mine.svg" alt="mine">
+        <span class="sweeper-text">SWEEPER</span>
+      </div>
+      <div class="score">
+        <span class="ml-4">Score</span>
+        <span class="score-text mr-4">{{score}}</span>
+      </div>
     </div>
 
     <div class="inputs">
-      <input type="text" class="form-control" placeholder="Your name.." v-model="nameInput" @keypress.enter="addPlayer">
+      <input type="text" class="form-control" placeholder="Your name.." 
+            v-model="nameInput" @keypress.enter="addPlayer">
+
+
+
+
+
       
       <div class="form-group">
           <label>
@@ -25,6 +38,10 @@
           <label>
             <input type="radio" value="64" v-model="gridCount">8*8
           </label>
+
+          
+
+          
       </div>
 
       <button  class="btn btn-warning"  @click="addPlayer" :disabled="nameInput.length == 0">Start</button>
@@ -39,7 +56,7 @@
 
             <div class="kapsayici-body">
                 <button  class='btn btn-warning ml-3'>Try Again</button>
-                <button  class='btn btn-success mr-3 float-right' @click="addPlayer" >New Game</button> 
+                <button  class='btn btn-success mr-3 button-newgame float-right' @click="addPlayer" >New Game</button> 
             </div>
         </div>
 
@@ -105,6 +122,8 @@ export default {
 
 <style scoped>
 
+
+
   .main-head {
     display: flex;
     justify-content: space-between;
@@ -116,16 +135,40 @@ export default {
   .logo {
     width: 525px;
     height: 108px;
-    background-color: gray;
-    padding-top: 15px;
+    /* background-color: gray; */
+    font-family: 'Baloo', cursive;
+    font-size: 66px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .mine-text {
+    color: #FF8A00;
+  }
+
+  .sweeper-text {
+    color: #00BCE5;;
   }
 
   .score {
     width: 250px;
     height: 60px;
-    background-color: lightgray;
+    background-color: #F7F9FA;
+    box-shadow: 0px 3px 0px #E6E6E6;
     border-radius: 10px;
-    padding-top: 15px;
+    color: #91949F;
+    font-size: 24px;
+    line-height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .score-text {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 32px;
+    color: #5D6980;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .inputs {
@@ -139,29 +182,31 @@ export default {
 
   .inputs>button {
     width: 100px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .form-group {
-    width: 250px;
-    padding: 10px;
-    background-color:greenyellow;
+    /* width: 250px; */
+    background: #F7F9FA;
+    box-shadow: 0px 3px 0px #E6E6E6;
+    border-radius: 10px;
   }
 
   .form-group label input {
-    margin-left: 15px;
+    margin-left: 20px;
   }
 
   .kapsayici {
-        position: fixed;
-        top: 40%;
-        left: 40%;
-        width: 300px;
-        height: 150px;
-        background-color:#F7F9FA;
-        border-radius: 10px;
-        z-index: 1;
-        box-shadow: 0px 3px 0px #E6E6E6;
-        line-height: 33px;
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    width: 300px;
+    height: 150px;
+    background-color:#F7F9FA;
+    border-radius: 10px;
+    z-index: 1;
+    box-shadow: 0px 3px 0px #E6E6E6;
+    line-height: 33px;
     }
 
     .kapsayici-header span {
@@ -170,18 +215,24 @@ export default {
     }
 
     .text {
-        font-size: 24px;
-        font-weight: 700;
-        background-color: #00BCE5;
-        text-align: center;
-        color: white;
-        border-top-left-radius: 10px;
-      border-top-right-radius: 10px
+      font-size: 20px;
+      font-weight: 700;
+      background-color: #00BCE5;
+      text-align: center;
+      color: white;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 0px 3px 0px #E5E5E5;
     }
 
     .kapsayici-body>button{
         width: 120px;
         box-shadow: 0px 3px 0px #FFCF97;
+        color: white;
+    }
+
+    .kapsayici-body .button-newgame {
+      box-shadow: 0px 3px 0px #AEE3C5;
     }
 
     #perde {
