@@ -10,6 +10,6 @@ export default new Vuex.Store({
     names : [],
     points : [],
     modalShow : false,
-    quareCount : null,
+    // quareCount : null,  >>  mayın tarlasındaki grid sayısı
   },
 })

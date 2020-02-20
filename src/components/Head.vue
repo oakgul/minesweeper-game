@@ -8,20 +8,38 @@
 
     <div class="inputs">
       <input type="text" class="form-control" placeholder="Your name.." v-model="nameInput" @keypress.enter="addPlayer">
-      <input type="text" class="form-control" placeholder="Grid count..">
+      
+      <div class="form-group">
+          <label>
+            <input  type="radio" value="25" v-model="gridCount">5*5
+          </label>
+
+          <label>
+            <input type="radio" value="36" v-model="gridCount">6*6
+          </label>
+
+          <label>
+            <input type="radio" value="49" v-model="gridCount">7*7
+          </label>
+
+          <label>
+            <input type="radio" value="64" v-model="gridCount">8*8
+          </label>
+      </div>
+
       <button  class="btn btn-warning"  @click="addPlayer" :disabled="nameInput.length == 0">Start</button>
     </div>
 
     <!-- modal -->
     <div v-if="modalShow" class="kapsayici">
-            <div class="kapsayici-header">
-                <div class="text">GAME OVER</div>
-                <p>Your Score : {{score}}</p>
+            <div class="kapsayici-header mb-3">
+                <div class="text mb-2">GAME OVER</div>
+                <span class="ml-3">Your Score</span><span style="color:#5D6980; font-weight:600" class="float-right mr-3">{{score}}</span>
             </div>
 
             <div class="kapsayici-body">
-                <button  class='btn btn-warning'>Try Again</button>
-                <button  @click="addPlayer" class='btn btn-success'>New Game</button> 
+                <button  class='btn btn-warning ml-3'>Try Again</button>
+                <button  class='btn btn-success mr-3 float-right' @click="addPlayer" >New Game</button> 
             </div>
         </div>
 
@@ -36,6 +54,7 @@ export default {
   data() {
     return {
       nameInput : '',
+      gridCount : 25,
     }
   },
 
@@ -47,7 +66,7 @@ export default {
             this.$store.state.names.push(this.nameInput);
             this.nameInput = '';
 
-            for(let i=0; i<25; i++){
+            for(let i=0; i<this.gridCount; i++){
             this.$store.state.data.push({
                 color : 'green',
                 show : false,
@@ -55,9 +74,9 @@ export default {
           }
 
             for(let i=0; i<5; i++){
-                let mayinIndex = Math.floor(Math.random() * 25)
+                let mayinIndex = Math.floor(Math.random() * this.gridCount)
                 if(this.$store.state.data[mayinIndex] === 'red') {
-                    mayinIndex = Math.floor(Math.random() * 25)
+                    mayinIndex = Math.floor(Math.random() * this.gridCount)
                     this.$store.state.data[mayinIndex].color = 'red'
                 }else {
                     this.$store.state.data[mayinIndex].color = 'red'
@@ -122,27 +141,47 @@ export default {
     width: 100px;
   }
 
+  .form-group {
+    width: 250px;
+    padding: 10px;
+    background-color:greenyellow;
+  }
+
+  .form-group label input {
+    margin-left: 15px;
+  }
+
   .kapsayici {
         position: fixed;
         top: 40%;
         left: 40%;
         width: 300px;
         height: 150px;
-        background-color:whitesmoke;
-        border: 1px solid black;
+        background-color:#F7F9FA;
+        border-radius: 10px;
         z-index: 1;
+        box-shadow: 0px 3px 0px #E6E6E6;
+        line-height: 33px;
+    }
+
+    .kapsayici-header span {
+      font-size: 24px;
+      color: #91949F;
     }
 
     .text {
         font-size: 24px;
-        background-color: rgb(194, 138, 138);
+        font-weight: 700;
+        background-color: #00BCE5;
         text-align: center;
+        color: white;
+        border-top-left-radius: 10px;
+      border-top-right-radius: 10px
     }
 
-    .kapsayici-body {
-        position: relative;
-        left: 40px;
-        top: 7px;
+    .kapsayici-body>button{
+        width: 120px;
+        box-shadow: 0px 3px 0px #FFCF97;
     }
 
     #perde {
