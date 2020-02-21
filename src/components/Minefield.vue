@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="mine-field">
-           <button :disabled='item.show === true'  class="box" v-for="item in data" :key="item.id" 
+           <button :disabled='item.show === true'  class="box mb-2" v-for="item in data" :key="item.id" 
             :style="{backgroundColor: item.show === true ? item.color : null}"  @click="check(item)">
             </button>
        </div>
@@ -75,10 +75,6 @@ export default {
     .mine-field {
         width: 330px;
         height: 330px;
-
-        /* display: flex;
-        flex-wrap: wrap; */
     }
 
-    
 </style>

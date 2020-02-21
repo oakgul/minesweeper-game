@@ -18,11 +18,21 @@
             v-model="nameInput" @keypress.enter="addPlayer">
 
 
-
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" value="25" v-model="gridCount" id="option1" checked> 5*5
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" value="36" v-model="gridCount" id="option2"> 6*6
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" value="49" v-model="gridCount" id="option3"> 7*7
+  </label>
+</div>
 
 
       
-      <div class="form-group">
+      <!-- <div class="form-group">
           <label>
             <input  type="radio" value="25" v-model="gridCount">5*5
           </label>
@@ -42,9 +52,9 @@
           
 
           
-      </div>
+      </div> -->
 
-      <button  class="btn btn-warning"  @click="addPlayer" :disabled="nameInput.length == 0">Start</button>
+      <button style="color:white; height:38px" class="btn btn-warning"  @click="addPlayer" :disabled="nameInput.length == 0">Start</button>
     </div>
 
     <!-- modal -->
@@ -190,6 +200,11 @@ export default {
     background: #F7F9FA;
     box-shadow: 0px 3px 0px #E6E6E6;
     border-radius: 10px;
+  }
+
+  .form-group input:hover {
+    cursor: pointer;
+
   }
 
   .form-group label input {
