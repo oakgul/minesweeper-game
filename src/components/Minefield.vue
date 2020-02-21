@@ -1,9 +1,11 @@
 <template>
     <div class="container">
+        <p> Mayın Sayısı : {{minePiece}}</p>
 
-        <div class="mine-field">
+        <div :style="{width:gridPiece + 'px'}" class="mine-field">
            <button :disabled='item.show === true'  class="box mb-2" v-for="item in data" :key="item.id" 
             :style="{backgroundColor: item.show === true ? item.color : null}"  @click="check(item)">
+                
             </button>
        </div>
 
@@ -19,13 +21,20 @@ export default {
 
     data() {
         return {
-            
         }
     },
 
     computed : {
         data() {
             return this.$store.state.data;
+        },
+
+        gridPiece() {
+            return this.$store.state.gridPiece;
+        },
+
+        minePiece() {
+            return this.$store.state.minePiece;
         }
     },
 
@@ -40,6 +49,7 @@ export default {
                 })
             }else {
                 item.show = true;
+                this.$store.state.minePiece--;
                 this.$store.state.score += 5;
             }
           },

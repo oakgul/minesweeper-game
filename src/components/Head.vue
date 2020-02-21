@@ -15,7 +15,7 @@
 
     <div class="inputs">
       <input type="text" class="form-control" placeholder="Your name.." 
-            v-model="nameInput" @keypress.enter="addPlayer">
+            v-model="nameInput" @keypress.enter="addPlayer" :disabled="isGameStart">
 
 
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -82,11 +82,33 @@ export default {
     return {
       nameInput : '',
       gridCount : 25,
+      mineCount : 5,
+      isGameStart : false,
     }
   },
 
   methods : {
+
+        gridPiece() {
+          if(this.gridCount == 25){
+            this.$store.state.gridPiece = 330;
+            this.$store.state.minePiece = 20;
+          }else if(this.gridCount == 36) {
+            this.$store.state.gridPiece = 396;
+            this.mineCount = 6;
+            this.$store.state.minePiece = 30;
+          }else{
+            this.$store.state.gridPiece = 500;
+            this.mineCount = 7;
+            this.$store.state.minePiece = 42;
+          }
+        },
+        
+
+
         addPlayer() {
+          this.isGameStart = !this.isGameStart;
+          this.gridPiece();
          if(this.$store.state.data.length > 0) {
             this.$store.state.data = []
           }else{
@@ -100,13 +122,15 @@ export default {
             })
           }
 
-            for(let i=0; i<5; i++){
+            for(let i=0; i<this.mineCount; i++){
                 let mayinIndex = Math.floor(Math.random() * this.gridCount)
                 if(this.$store.state.data[mayinIndex] === 'red') {
                     mayinIndex = Math.floor(Math.random() * this.gridCount)
                     this.$store.state.data[mayinIndex].color = 'red'
+      
                 }else {
                     this.$store.state.data[mayinIndex].color = 'red'
+                    
                 }
             }
             

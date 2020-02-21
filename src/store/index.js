@@ -10,6 +10,8 @@ export default new Vuex.Store({
     names : [],
     points : [],
     modalShow : false,
+    gridPiece : 0,
+    minePiece : 0,
     players : {
           name : [],
           point : [],
