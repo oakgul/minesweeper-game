@@ -16,6 +16,7 @@
       <input type="text" class="form-control" placeholder="Your name.." v-model="nameInput" @keypress.enter="addPlayer" :disabled="isGameStart">
 
       {{gridCount}}
+        <!-- SET GRID ITEMS -->
       <div class="btn-group btn-group-toggle" >
         <label  class="btn btn btn-outline-dark" >
           <input  type="radio" name="options" value="25" v-model="gridCount" id="option1" checked> 5*5
@@ -33,25 +34,24 @@
 
     <!-- modal -->
     <div v-if="modalShow" class="kapsayici">
-            <div class="kapsayici-header mb-3">
-                <div class="text mb-2">GAME OVER</div>
-                <span class="ml-3">Your Score</span><span style="color:#5D6980; font-weight:600" class="float-right mr-3">{{score}}</span>
-            </div>
+      <div class="kapsayici-header mb-3">
+        <div class="text mb-2">GAME OVER</div>
+        <span class="ml-3">Your Score</span><span style="color:#5D6980; font-weight:600" class="float-right mr-3">{{score}}</span>
+      </div>
 
-            <div class="kapsayici-body">
-                <button  class='btn btn-warning ml-3' @click="tryAgain">Try Again</button>
-                <button  class='btn btn-success mr-3 button-newgame float-right' @click="newGame">New Game</button> 
-            </div>
-        </div>
+      <div class="kapsayici-body">
+        <button  class='btn btn-warning ml-3' @click="tryAgain">Try Again</button>
+        <button  class='btn btn-success mr-3 button-newgame float-right' @click="newGame">New Game</button> 
+      </div>
+    </div>
 
-        <div v-if="modalShow" id="perde"></div>
+    <div v-if="modalShow" id="perde"></div>
 
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-
   data() {
     return {
       nameInput : '',
@@ -63,77 +63,77 @@ export default {
 
   methods : {
 
-        gridPiece() {
-          if(this.gridCount == 25){
-            this.$store.state.gridPiece = 330;
-            this.$store.state.minePiece = 20;
-          }else if(this.gridCount == 36) {
-            this.$store.state.gridPiece = 396;
-            this.mineCount = 6;
-            this.$store.state.minePiece = 30;
-          }else{
-            this.$store.state.gridPiece = 500;
-            this.mineCount = 7;
-            this.$store.state.minePiece = 42;
-          }
-        },
-        
-        // tryAgain(){
-        //   this.isGameStart = false;
-        //   this.addPlayer();
-          
-        // },
-        
-
-
-        addPlayer() {
-          this.isGameStart = !this.isGameStart;
-          this.gridPiece();
-
-          if(this.$store.state.data.length > 0) {
-            this.$store.state.data = [];
-          }else{
-            for(let i=0; i<this.gridCount; i++){
-              this.$store.state.data.push({
-                color : 'green',
-                show : false,
-            })
-          }
-
-            for(let i=0; i<this.mineCount; i++){
-                let mayinIndex = Math.floor(Math.random() * this.gridCount)
-                if(this.$store.state.data[mayinIndex] === 'red') {
-                    mayinIndex = Math.floor(Math.random() * this.gridCount)
-                    this.$store.state.data[mayinIndex].color = 'red';
-                }else {
-                    this.$store.state.data[mayinIndex].color = 'red'
-                }
-            }
-          }
-
-            this.$store.state.modalShow = false;
-            this.$store.state.score = 0;
-        },
-
-        newGame(){
-          this.$store.state.names.push(this.nameInput);
-          this.nameInput = '';
-          this.addPlayer();
-        },
-
-        
-
+    addPlayer() {
+      this.isGameStart = !this.isGameStart;
+      this.gridPiece();
+      if(this.$store.state.data.length > 0) {
+        this.$store.state.data = [];
+      }else{
+        this.setMineItems();
+      }
+      this.$store.state.modalShow = false;
+      this.$store.state.score = 0;
     },
 
-    computed : {
-      score() {
-        return this.$store.state.score;
-      },
+    gridPiece() {
+      if(this.gridCount == 25){
+        this.$store.state.gridPiece = 330;
+        this.$store.state.minePiece = 20;
+      }else if(this.gridCount == 36) {
+        this.$store.state.gridPiece = 396;
+        this.mineCount = 6;
+        this.$store.state.minePiece = 30;
+      }else{
+        this.$store.state.gridPiece = 500;
+        this.mineCount = 7;
+        this.$store.state.minePiece = 42;
+      }
+    },
 
-      modalShow() {
-        return this.$store.state.modalShow;
-      },
-    }
+    tryAgain() {
+      this.isGameStart = true;
+      this.gridPiece();
+      this.$store.state.data = [];
+      this.setMineItems();   
+      this.$store.state.modalShow = false;
+      this.$store.state.score = 0;    
+    },
+
+    newGame() {
+      this.$store.state.names.push(this.nameInput);
+      this.nameInput = '';
+      this.addPlayer();
+    },
+
+    setMineItems() {
+      for(let i=0; i<this.gridCount; i++){
+          this.$store.state.data.push({
+            color : 'green',
+            show : false,
+          })
+      }
+      for(let i=0; i<this.mineCount; i++){
+          let mayinIndex = Math.floor(Math.random() * this.gridCount)
+          if(this.$store.state.data[mayinIndex] === 'red') {
+            mayinIndex = Math.floor(Math.random() * this.gridCount)
+            this.$store.state.data[mayinIndex].color = 'red';
+          }else{
+            this.$store.state.data[mayinIndex].color = 'red'
+          }
+      }
+    },
+  },
+
+  computed : {
+
+    score() {
+      return this.$store.state.score;
+    },
+
+    modalShow() {
+      return this.$store.state.modalShow;
+    },
+  }
 }
 </script>
 
@@ -195,7 +195,6 @@ export default {
   .inputs>button {
     width: 100px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    
   }
 
   .form-group {
@@ -206,7 +205,6 @@ export default {
 
   .form-group input:hover {
     cursor: pointer;
-
   }
 
   .form-group label input {
@@ -260,5 +258,4 @@ export default {
     bottom: 0;
     background-color:rgba(0, 0, 0, .5);
   }
-
 </style>
