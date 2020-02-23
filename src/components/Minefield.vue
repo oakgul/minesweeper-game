@@ -1,11 +1,10 @@
 <template>
     <div class="container">
-        <p> Mayın Sayısı : {{minePiece}}</p>
 
         <div :style="{width:gridPiece + 'px'}" class="mine-field">
            <button :disabled='item.show === true'  class="box mb-2" v-for="item in data" :key="item.id" 
             :style="{backgroundColor: item.show === true ? item.color : null}"  @click="check(item)">
-                
+                <p>{{item.color.length}}</p>
             </button>
        </div>
 
@@ -19,11 +18,6 @@
 <script>
 export default {
 
-    data() {
-        return {
-        }
-    },
-
     computed : {
         data() {
             return this.$store.state.data;
@@ -35,10 +29,17 @@ export default {
 
         minePiece() {
             return this.$store.state.minePiece;
-        }
+        },
+
     },
 
     methods : {
+
+        gameOver() {
+            this.$store.state.modalShow = true;
+        },
+
+
         check(item) {
             if(item.color === 'red') {
                 this.$store.state.points.push(this.score);
@@ -47,16 +48,13 @@ export default {
                 this.data.forEach(x => {
                     x.show = true;
                 })
-            }else {
+            }else{
                 item.show = true;
-                this.$store.state.minePiece--;
                 this.$store.state.score += 5;
             }
           },
 
-          gameOver() {
-            this.$store.state.modalShow = true;
-        },
+          
     }
     
 }

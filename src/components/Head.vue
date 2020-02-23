@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <div class="main-head mb-3">
       <div class="logo">
         <span class="mine-text">MINE</span>
@@ -14,47 +13,22 @@
     </div>
 
     <div class="inputs">
-      <input type="text" class="form-control" placeholder="Your name.." 
-            v-model="nameInput" @keypress.enter="addPlayer" :disabled="isGameStart">
+      <input type="text" class="form-control" placeholder="Your name.." v-model="nameInput" @keypress.enter="addPlayer" :disabled="isGameStart">
 
-
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary active">
-    <input type="radio" name="options" value="25" v-model="gridCount" id="option1" checked> 5*5
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" value="36" v-model="gridCount" id="option2"> 6*6
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" value="49" v-model="gridCount" id="option3"> 7*7
-  </label>
-</div>
-
-
+      {{gridCount}}
+      <div class="btn-group btn-group-toggle" >
+        <label  class="btn btn btn-outline-dark" >
+          <input  type="radio" name="options" value="25" v-model="gridCount" id="option1" checked> 5*5
+        </label>
+        <label  class="btn btn btn-outline-dark">
+          <input type="radio" name="options" value="36" v-model="gridCount" id="option2"> 6*6
+        </label>
+        <label  class="btn btn btn-outline-dark">
+          <input type="radio" name="options" value="49" v-model="gridCount" id="option3"> 7*7
+        </label>
+      </div>
       
-      <!-- <div class="form-group">
-          <label>
-            <input  type="radio" value="25" v-model="gridCount">5*5
-          </label>
-
-          <label>
-            <input type="radio" value="36" v-model="gridCount">6*6
-          </label>
-
-          <label>
-            <input type="radio" value="49" v-model="gridCount">7*7
-          </label>
-
-          <label>
-            <input type="radio" value="64" v-model="gridCount">8*8
-          </label>
-
-          
-
-          
-      </div> -->
-
-      <button style="color:white; height:38px" class="btn btn-warning"  @click="addPlayer" :disabled="nameInput.length == 0">Start</button>
+      <button style="color:white; height:38px; border-bottom-left-radius:0" class="btn btn-warning" @click="addPlayer" :disabled="isGameStart">Start</button>
     </div>
 
     <!-- modal -->
@@ -65,8 +39,8 @@
             </div>
 
             <div class="kapsayici-body">
-                <button  class='btn btn-warning ml-3'>Try Again</button>
-                <button  class='btn btn-success mr-3 button-newgame float-right' @click="addPlayer" >New Game</button> 
+                <button  class='btn btn-warning ml-3' @click="tryAgain">Try Again</button>
+                <button  class='btn btn-success mr-3 button-newgame float-right' @click="newGame">New Game</button> 
             </div>
         </div>
 
@@ -104,19 +78,23 @@ export default {
           }
         },
         
+        // tryAgain(){
+        //   this.isGameStart = false;
+        //   this.addPlayer();
+          
+        // },
+        
 
 
         addPlayer() {
           this.isGameStart = !this.isGameStart;
           this.gridPiece();
-         if(this.$store.state.data.length > 0) {
-            this.$store.state.data = []
-          }else{
-            this.$store.state.names.push(this.nameInput);
-            this.nameInput = '';
 
+          if(this.$store.state.data.length > 0) {
+            this.$store.state.data = [];
+          }else{
             for(let i=0; i<this.gridCount; i++){
-            this.$store.state.data.push({
+              this.$store.state.data.push({
                 color : 'green',
                 show : false,
             })
@@ -126,20 +104,25 @@ export default {
                 let mayinIndex = Math.floor(Math.random() * this.gridCount)
                 if(this.$store.state.data[mayinIndex] === 'red') {
                     mayinIndex = Math.floor(Math.random() * this.gridCount)
-                    this.$store.state.data[mayinIndex].color = 'red'
-      
+                    this.$store.state.data[mayinIndex].color = 'red';
                 }else {
                     this.$store.state.data[mayinIndex].color = 'red'
-                    
                 }
             }
-            
-            }
+          }
+
             this.$store.state.modalShow = false;
             this.$store.state.score = 0;
+        },
 
-            
-        }
+        newGame(){
+          this.$store.state.names.push(this.nameInput);
+          this.nameInput = '';
+          this.addPlayer();
+        },
+
+        
+
     },
 
     computed : {
@@ -149,27 +132,22 @@ export default {
 
       modalShow() {
         return this.$store.state.modalShow;
-      }
+      },
     }
 }
 </script>
 
 <style scoped>
-
-
-
   .main-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    
   }
 
   .logo {
     width: 525px;
     height: 108px;
-    /* background-color: gray; */
     font-family: 'Baloo', cursive;
     font-size: 66px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -217,10 +195,10 @@ export default {
   .inputs>button {
     width: 100px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
   }
 
   .form-group {
-    /* width: 250px; */
     background: #F7F9FA;
     box-shadow: 0px 3px 0px #E6E6E6;
     border-radius: 10px;
@@ -246,41 +224,41 @@ export default {
     z-index: 1;
     box-shadow: 0px 3px 0px #E6E6E6;
     line-height: 33px;
-    }
+  }
 
-    .kapsayici-header span {
-      font-size: 24px;
-      color: #91949F;
-    }
+  .kapsayici-header span {
+    font-size: 24px;
+    color: #91949F;
+  }
 
-    .text {
-      font-size: 20px;
-      font-weight: 700;
-      background-color: #00BCE5;
-      text-align: center;
-      color: white;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      box-shadow: 0px 3px 0px #E5E5E5;
-    }
+  .text {
+    font-size: 20px;
+    font-weight: 700;
+    background-color: #00BCE5;
+    text-align: center;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 3px 0px #E5E5E5;
+  }
 
-    .kapsayici-body>button{
-        width: 120px;
-        box-shadow: 0px 3px 0px #FFCF97;
-        color: white;
-    }
+  .kapsayici-body>button{
+    width: 120px;
+    box-shadow: 0px 3px 0px #FFCF97;
+    color: white;
+  }
 
-    .kapsayici-body .button-newgame {
-      box-shadow: 0px 3px 0px #AEE3C5;
-    }
+  .kapsayici-body .button-newgame {
+    box-shadow: 0px 3px 0px #AEE3C5;
+  }
 
-    #perde {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color:rgba(0, 0, 0, .5);
-    }
+  #perde {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgba(0, 0, 0, .5);
+  }
 
 </style>
