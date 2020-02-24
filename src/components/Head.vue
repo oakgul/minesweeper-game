@@ -231,7 +231,7 @@ export default {
     height: 150px;
     background-color:#F7F9FA;
     border-radius: 10px;
-    z-index: 1;
+    z-index: 10;
     box-shadow: 0px 3px 0px #E6E6E6;
     line-height: 33px;
   }
@@ -269,5 +269,6 @@ export default {
     right: 0;
     bottom: 0;
     background-color:rgba(0, 0, 0, .5);
+    z-index: 9;
   }
 </style>

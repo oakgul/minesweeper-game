@@ -4,8 +4,11 @@
         <div :style="{width:gridPiece + 'px'}" class="mine-field">
            <button :disabled='item.show === true'  class="box mb-2" v-for="item in data" :key="item.id" 
             :style="{backgroundColor: item.show === true ? item.color : null}"  @click="check(item)">
-                <img v-if="item.color === '#25A35C' " src="../assets/check.svg" alt="check">
-                <img v-if="item.color === '#FA3A3A' " src="../assets/mine.svg" alt="mine">
+              
+                    <img class="checkIcon" v-if="item.color === '#25A35C' && item.show === true" src="../assets/check.svg" alt="check">
+                    <img class="mineIcon" v-if="item.color === '#FA3A3A' && item.show === true" src="../assets/mine.svg" alt="mine">    
+     
+                
             </button>
        </div>
 
@@ -19,7 +22,11 @@
 <script>
 export default {
 
-
+    data() {
+        return {
+           
+        }
+    },
    
 
     computed : {
@@ -78,6 +85,7 @@ export default {
         margin-right: 5px;
         margin-bottom: 1px;
         cursor: pointer;
+        position: relative;
     }
 
     .box:hover {
@@ -87,6 +95,18 @@ export default {
     .mine-field {
         width: 330px;
         height: 330px;
+    }
+
+    .checkIcon {
+        position: absolute;
+        left: 10%;
+        top: 25%;
+    }
+
+    .mineIcon {
+        position: absolute;
+        left: 21%;
+        top: 13%;
     }
 
 </style>
