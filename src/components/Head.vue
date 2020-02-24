@@ -15,16 +15,15 @@
     <div class="inputs">
       <input type="text" class="form-control" placeholder="Your name.." v-model="nameInput" @keypress.enter="addPlayer" :disabled="isGameStart">
 
-      {{gridCount}}
         <!-- SET GRID ITEMS -->
       <div class="btn-group btn-group-toggle" >
-        <label  class="btn btn btn-outline-dark" >
+        <label :style="{backgroundColor: gridCount == 25 ? '#979A9A' : null}" class="btn btn btn-outline-dark" >
           <input  type="radio" name="options" value="25" v-model="gridCount" id="option1" checked> 5*5
         </label>
-        <label  class="btn btn btn-outline-dark">
+        <label :style="{backgroundColor: gridCount == 36 ? '#979A9A' : null}" class="btn btn btn-outline-dark">
           <input type="radio" name="options" value="36" v-model="gridCount" id="option2"> 6*6
         </label>
-        <label  class="btn btn btn-outline-dark">
+        <label :style="{backgroundColor: gridCount == 49 ? '#979A9A' : null}" class="btn btn btn-outline-dark">
           <input type="radio" name="options" value="49" v-model="gridCount" id="option3"> 7*7
         </label>
       </div>
