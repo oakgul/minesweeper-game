@@ -100,12 +100,21 @@ export default {
     },
 
     newGame() {
-      this.$store.state.names.push(this.nameInput);
+      this.$store.state.players.push({name: this.nameInput, point: this.score});
+      this.topTenScoreCalculate();
       this.nameInput = '';
       this.addPlayer();
     },
 
+    // TOP 10 SCORE CALCULATE
+    topTenScoreCalculate(){
+      this.$store.state.players.sort(function (a, b) {
+      return b.point - a.point;
+      });
+    },
+
     setMineItems() {
+      console.log('setMineItems ..');
       for(let i=0; i<this.gridCount; i++){
           this.$store.state.data.push({
             color : 'green',
@@ -133,11 +142,12 @@ export default {
     modalShow() {
       return this.$store.state.modalShow;
     },
-  }
+  },
 }
 </script>
 
 <style scoped>
+
   .main-head {
     display: flex;
     justify-content: space-between;

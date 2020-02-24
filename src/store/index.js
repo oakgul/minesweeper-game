@@ -12,10 +12,6 @@ export default new Vuex.Store({
     modalShow : false,
     gridPiece : 0,
     minePiece : 0,
-    players : {
-          name : [],
-          point : [],
-    }
-    // quareCount : null,  >>  mayın tarlasındaki grid sayısı
+    players : [],
   },
 })

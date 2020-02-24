@@ -4,8 +4,11 @@
         <div class="scoreboard float-right">
             <div class="header">Top 10 Score</div>
             <ul>
-                <li style="list-style-type:none" v-for="player in names" :key="player.id">
-                     {{names.indexOf(player) + 1}}.  {{ player }}</li>
+                <li style="list-style-type:none" 
+                    v-for="player in names" 
+                    :key="player.id">
+                     {{names.indexOf(player) + 1}}.  {{ player }}
+                </li>
             </ul>
         </div>
 
@@ -16,16 +19,14 @@
 export default {
     computed : {
         names() {
-            return this.$store.state.names;
-        }
+            return this.$store.state.players;
+        },
     }
 }
 </script>
 
-
-
 <style scoped>
-
+    
     .scoreboard {
         width: 350px;
         height: 330px;
@@ -47,8 +48,4 @@ export default {
         box-shadow: 0px 3px 0px #E5E5E5;
         border-radius: 10px 10px 0px 0px;
     }
-
-    
-    
-
 </style>
