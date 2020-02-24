@@ -1,10 +1,11 @@
 <template>
-  <div class="container" id="app">
+  <div id="app" class="main">,
+    <div class="container" >
     <Head class="mt-2" />
     <hr>  
     <Minefield />
     <Scoreboard />
-    <!-- <Deneme /> -->
+  </div>
   </div>
 </template>
 
@@ -12,7 +13,6 @@
 import Head from './components/Head.vue';
 import Minefield from './components/Minefield';
 import Scoreboard from './components/Scoreboard';
-// import Deneme from './components/Deneme';
 
 export default {
   name: 'App',
@@ -20,7 +20,6 @@ export default {
     Head,
     Minefield,
     Scoreboard,
-    // Deneme,
   }
 }
 </script>
@@ -28,6 +27,6 @@ export default {
 <style scoped>
   .container {
     width: 900px;
-    /* background-color: red; */
   }
+
 </style>

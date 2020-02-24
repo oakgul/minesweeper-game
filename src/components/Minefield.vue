@@ -4,7 +4,8 @@
         <div :style="{width:gridPiece + 'px'}" class="mine-field">
            <button :disabled='item.show === true'  class="box mb-2" v-for="item in data" :key="item.id" 
             :style="{backgroundColor: item.show === true ? item.color : null}"  @click="check(item)">
-                <p>{{item.color.length}}</p>
+                <img v-if="item.color === '#25A35C' " src="../assets/check.svg" alt="check">
+                <img v-if="item.color === '#FA3A3A' " src="../assets/mine.svg" alt="mine">
             </button>
        </div>
 
@@ -17,6 +18,8 @@
 
 <script>
 export default {
+
+
    
 
     computed : {
@@ -42,7 +45,7 @@ export default {
 
 
         check(item) {
-            if(item.color === 'red') {
+            if(item.color === '#FA3A3A') {
                 this.$store.state.points.push(this.score);
                 this.gameOver();
 

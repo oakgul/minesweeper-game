@@ -7,7 +7,7 @@
                 <li style="list-style-type:none" 
                     v-for="player in names" 
                     :key="player.id">
-                     {{names.indexOf(player) + 1}}.  {{ player }}
+                     {{names.indexOf(player) + 1}}.  {{ player.name }} {{player.point}}
                 </li>
             </ul>
         </div>

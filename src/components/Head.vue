@@ -29,7 +29,7 @@
         </label>
       </div>
       
-      <button style="color:white; height:38px; border-bottom-left-radius:0" class="btn btn-warning" @click="addPlayer" :disabled="isGameStart">Start</button>
+      <button style="color:white; height:38px; border-bottom-left-radius:0" class="btn btn-warning" @click="addPlayer" :disabled="isGameStart || nameInput.length === 0">Start</button>
     </div>
 
     <!-- modal -->
@@ -100,6 +100,9 @@ export default {
     },
 
     newGame() {
+      if(this.$store.state.players.length === 10){
+        this.$store.state.players.pop();
+      }
       this.$store.state.players.push({name: this.nameInput, point: this.score});
       this.topTenScoreCalculate();
       this.nameInput = '';
@@ -117,17 +120,17 @@ export default {
       console.log('setMineItems ..');
       for(let i=0; i<this.gridCount; i++){
           this.$store.state.data.push({
-            color : 'green',
+            color : '#25A35C',
             show : false,
           })
       }
       for(let i=0; i<this.mineCount; i++){
           let mayinIndex = Math.floor(Math.random() * this.gridCount)
-          if(this.$store.state.data[mayinIndex] === 'red') {
+          if(this.$store.state.data[mayinIndex] === '#FA3A3A') {
             mayinIndex = Math.floor(Math.random() * this.gridCount)
-            this.$store.state.data[mayinIndex].color = 'red';
+            this.$store.state.data[mayinIndex].color = '#FA3A3A';
           }else{
-            this.$store.state.data[mayinIndex].color = 'red'
+            this.$store.state.data[mayinIndex].color = '#FA3A3A'
           }
       }
     },
