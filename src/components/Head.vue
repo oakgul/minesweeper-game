@@ -99,6 +99,7 @@ export default {
     },
 
     newGame() {
+      // SET MAX NUMBER OF PLAYERS - max: 10
       if(this.$store.state.players.length === 10){
         this.$store.state.players.pop();
       }
@@ -123,7 +124,7 @@ export default {
             show : false,
           })
       }
-      for(let i=0; i<this.mineCount; i++){
+      for(let i=1; i<this.mineCount; i++){
           let mayinIndex = Math.floor(Math.random() * this.gridCount)
           if(this.$store.state.data[mayinIndex] === '#FA3A3A') {
             mayinIndex = Math.floor(Math.random() * this.gridCount)

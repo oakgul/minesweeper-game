@@ -12,6 +12,13 @@
             </button>
        </div>
 
+        <audio id="myAudio">
+            <source src="../assets/lost.wav" type="audio/ogg">
+        </audio>
+
+        <audio id="coinAudio">
+            <source src="../assets/coin.wav">
+        </audio>
         
 
     </div>
@@ -20,14 +27,7 @@
 
 
 <script>
-export default {
-
-    data() {
-        return {
-           
-        }
-    },
-   
+export default {  
 
     computed : {
         data() {
@@ -52,16 +52,20 @@ export default {
 
 
         check(item) {
+            let audio = document.getElementById('myAudio');
             if(item.color === '#FA3A3A') {
                 this.$store.state.points.push(this.score);
+                audio.play();
                 this.gameOver();
 
                 this.data.forEach(x => {
                     x.show = true;
                 })
             }else{
+                let coinAudio = document.getElementById('coinAudio');
                 item.show = true;
                 this.$store.state.score += 5;
+                coinAudio.play();
             }
           },
 
