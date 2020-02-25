@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-
         <div class="scoreboard float-right">
             <div class="header">Top 10 Score</div>
             <ul>
@@ -11,7 +10,6 @@
                 </li>
             </ul>
         </div>
-
     </div>
 </template>
 
@@ -21,12 +19,11 @@ export default {
         names() {
             return this.$store.state.players;
         },
-    }
+    },
 }
 </script>
 
-<style scoped>
-    
+<style scoped>    
     .scoreboard {
         width: 350px;
         height: 330px;

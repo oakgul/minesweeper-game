@@ -10,9 +10,10 @@ export default new Vuex.Store({
     names : [],
     points : [],
     modalShow : false,
+    winShow : false,
     gridPiece : 0,
     minePiece : 0,
-    greenBlocks : 0,
+    greenBlocks : 1,
     players : [],
   },
 })
