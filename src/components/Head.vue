@@ -15,6 +15,7 @@
     <div class="inputs">
       <input type="text" class="form-control" placeholder="Your name.." v-model="nameInput" @keypress.enter="addPlayer" :disabled="isGameStart">
 
+      <p>{{greenBlocks}}</p>
         <!-- SET GRID ITEMS -->
       <div class="btn-group btn-group-toggle" >
         <label :style="{backgroundColor: gridCount == 25 ? '#979A9A' : null}" class="btn btn btn-outline-dark" >
@@ -30,6 +31,8 @@
       
       <button style="color:white; height:38px; border-bottom-left-radius:0" class="btn btn-warning" @click="addPlayer" :disabled="isGameStart || nameInput.length === 0">Start</button>
     </div>
+
+    <p v-if="greenBlocks === 0">KAZANDINIZ :)</p>
 
     <!-- modal -->
     <div v-if="modalShow" class="kapsayici">
@@ -76,16 +79,22 @@ export default {
 
     gridPiece() {
       if(this.gridCount == 25){
+        
         this.$store.state.gridPiece = 330;
         this.$store.state.minePiece = 20;
+        this.$store.state.greenBlocks = 20;
       }else if(this.gridCount == 36) {
+        
         this.$store.state.gridPiece = 396;
         this.mineCount = 6;
         this.$store.state.minePiece = 30;
+        this.$store.state.greenBlocks = 30;
       }else{
+        
         this.$store.state.gridPiece = 500;
         this.mineCount = 7;
         this.$store.state.minePiece = 42;
+        this.$store.state.greenBlocks = 42;
       }
     },
 
@@ -129,8 +138,10 @@ export default {
           if(this.$store.state.data[mayinIndex] === '#FA3A3A') {
             mayinIndex = Math.floor(Math.random() * this.gridCount)
             this.$store.state.data[mayinIndex].color = '#FA3A3A';
+            
           }else{
-            this.$store.state.data[mayinIndex].color = '#FA3A3A'
+            this.$store.state.data[mayinIndex].color = '#FA3A3A';
+            
           }
       }
     },
@@ -144,6 +155,10 @@ export default {
 
     modalShow() {
       return this.$store.state.modalShow;
+    },
+
+    greenBlocks() {
+      return this.$store.state.greenBlocks;
     },
   },
 }

@@ -12,6 +12,7 @@ export default new Vuex.Store({
     modalShow : false,
     gridPiece : 0,
     minePiece : 0,
+    greenBlocks : 0,
     players : [],
   },
 })

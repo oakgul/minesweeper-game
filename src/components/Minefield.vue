@@ -4,11 +4,10 @@
         <div :style="{width:gridPiece + 'px'}" class="mine-field">
            <button :disabled='item.show === true'  class="box mb-2" v-for="item in data" :key="item.id" 
             :style="{backgroundColor: item.show === true ? item.color : null}"  @click="check(item)">
-              
+                        
                     <img class="checkIcon" v-if="item.color === '#25A35C' && item.show === true" src="../assets/check.svg" alt="check">
-                    <img class="mineIcon" v-if="item.color === '#FA3A3A' && item.show === true" src="../assets/mine.svg" alt="mine">    
-     
-                
+                    <img class="mineIcon" v-if="item.color === '#FA3A3A' && item.show === true" src="../assets/mine.svg" alt="mine">   
+                    <p v-if="item.color == '#FA3A3A'"> B</p> 
             </button>
        </div>
 
@@ -20,7 +19,7 @@
             <source src="../assets/coin.wav">
         </audio>
         
-
+        
     </div>
 </template>
 
@@ -41,6 +40,7 @@ export default {
         minePiece() {
             return this.$store.state.minePiece;
         },
+        
 
     },
 
@@ -66,6 +66,7 @@ export default {
                 item.show = true;
                 this.$store.state.score += 5;
                 coinAudio.play();
+                this.$store.state.greenBlocks--;
             }
           },
 
