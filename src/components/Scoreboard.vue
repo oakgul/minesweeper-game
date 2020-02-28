@@ -3,10 +3,11 @@
         <div class="scoreboard float-right">
             <div class="header">Top 10 Score</div>
             <ul>
-                <li style="list-style-type:none" 
+                <li style="list-style-type:none; font-family: 'Baloo', cursive; color:#5D6980" 
+                    class="mt-1"
                     v-for="player in names" 
                     :key="player.id">
-                     {{names.indexOf(player) + 1}}.  {{ player.name }} {{player.point}}
+                     {{names.indexOf(player) + 1}}.  {{ player.name }} <span class="float-right mr-5">{{player.point}}</span>
                 </li>
             </ul>
         </div>
